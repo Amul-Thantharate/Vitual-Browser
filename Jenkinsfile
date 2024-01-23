@@ -35,7 +35,7 @@ pipeline {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                     
                     dir('/home/ubuntu/.jenkins/workspace/virtual_browser/.docker/firefox') {
-      sh "docker build -t sushantkapare1717/virtual-demo:latest ."
+      sh "docker build -t amuldark/virtual-demo:latest ."
          }
                      }
                 }
@@ -44,14 +44,14 @@ pipeline {
         
         stage("TRIVY"){
             steps{
-                sh "trivy image sushantkapare1717/virtual-demo:latest > trivy.txt" 
+                sh "trivy image amuldark/virtual-demo:latest > trivy.txt" 
             }
         }
         stage("Docker Build & Push"){
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker'){   
-                         sh "docker push sushantkapare1717/virtual-demo:latest "
+                         sh "docker push amuldark/virtual-demo:latest "
                     }
                 }
             }
